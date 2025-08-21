@@ -10,7 +10,12 @@ public class Event extends Task {
     }
 
     @Override
+    public TaskType getTaskType() {
+        return TaskType.EVENT;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return getTaskType() + "[" + getStatusIcon() + "] " + description + " (from: " + from + " to: " + to + ")";
     }
 }
