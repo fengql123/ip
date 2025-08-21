@@ -77,11 +77,61 @@ public class Kris {
                     System.out.println(" Yo, gimme a valid number after 'unmark'!");
                     System.out.println("____________________________________________________________");
                 }
-            } else {
-                tasks[taskCount] = new Task(input);
+            } else if (input.startsWith("todo ")) {
+                String description = input.substring(5);
+                Task newTask = new Todo(description);
+                tasks[taskCount] = newTask;
                 taskCount++;
                 System.out.println("____________________________________________________________");
-                System.out.println(" added: " + input);
+                System.out.println(" Got it. I've added this task:");
+                System.out.println("   " + newTask);
+                System.out.println(" Now you have " + taskCount + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+            } else if (input.startsWith("deadline ")) {
+                int byIndex = input.indexOf("/by ");
+                if (byIndex == -1) {
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Yo! Use '/by' to specify the deadline!");
+                    System.out.println("____________________________________________________________");
+                } else {
+                    String description = input.substring(9, byIndex).trim();
+                    String by = input.substring(byIndex + 4).trim();
+                    Task newTask = new Deadline(description, by);
+                    tasks[taskCount] = newTask;
+                    taskCount++;
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Got it. I've added this task:");
+                    System.out.println("   " + newTask);
+                    System.out.println(" Now you have " + taskCount + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                }
+            } else if (input.startsWith("event ")) {
+                int fromIndex = input.indexOf("/from ");
+                int toIndex = input.indexOf("/to ");
+                if (fromIndex == -1 || toIndex == -1) {
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Yo! Use '/from' and '/to' to specify the event time!");
+                    System.out.println("____________________________________________________________");
+                } else {
+                    String description = input.substring(6, fromIndex).trim();
+                    String from = input.substring(fromIndex + 6, toIndex).trim();
+                    String to = input.substring(toIndex + 4).trim();
+                    Task newTask = new Event(description, from, to);
+                    tasks[taskCount] = newTask;
+                    taskCount++;
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Got it. I've added this task:");
+                    System.out.println("   " + newTask);
+                    System.out.println(" Now you have " + taskCount + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                }
+            } else {
+                System.out.println("____________________________________________________________");
+                System.out.println(" Yo! I don't understand that command. Try:");
+                System.out.println(" - todo [description]");
+                System.out.println(" - deadline [description] /by [time]");
+                System.out.println(" - event [description] /from [start] /to [end]");
+                System.out.println(" - list, mark [number], unmark [number], bye");
                 System.out.println("____________________________________________________________");
             }
         }
