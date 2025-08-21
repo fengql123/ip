@@ -16,7 +16,7 @@ public class Kris {
         
         Scanner scanner = new Scanner(System.in);
         String input;
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int taskCount = 0;
         
         while (true) {
@@ -33,13 +33,52 @@ public class Kris {
                 if (taskCount == 0) {
                     System.out.println(" Yo! Your task list is empty, time to get busy!");
                 } else {
+                    System.out.println(" Here are the tasks in your list:");
                     for (int i = 0; i < taskCount; i++) {
-                        System.out.println(" " + (i + 1) + ". " + tasks[i]);
+                        System.out.println(" " + (i + 1) + "." + tasks[i]);
                     }
                 }
                 System.out.println("____________________________________________________________");
+            } else if (input.startsWith("mark ")) {
+                try {
+                    int index = Integer.parseInt(input.substring(5)) - 1;
+                    if (index >= 0 && index < taskCount) {
+                        tasks[index].markAsDone();
+                        System.out.println("____________________________________________________________");
+                        System.out.println(" Nice! I've marked this task as done:");
+                        System.out.println("   " + tasks[index]);
+                        System.out.println("____________________________________________________________");
+                    } else {
+                        System.out.println("____________________________________________________________");
+                        System.out.println(" Yo, that task number doesn't exist in your list!");
+                        System.out.println("____________________________________________________________");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Yo, gimme a valid number after 'mark'!");
+                    System.out.println("____________________________________________________________");
+                }
+            } else if (input.startsWith("unmark ")) {
+                try {
+                    int index = Integer.parseInt(input.substring(7)) - 1;
+                    if (index >= 0 && index < taskCount) {
+                        tasks[index].markAsNotDone();
+                        System.out.println("____________________________________________________________");
+                        System.out.println(" OK, I've marked this task as not done yet:");
+                        System.out.println("   " + tasks[index]);
+                        System.out.println("____________________________________________________________");
+                    } else {
+                        System.out.println("____________________________________________________________");
+                        System.out.println(" Yo, that task number doesn't exist in your list!");
+                        System.out.println("____________________________________________________________");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Yo, gimme a valid number after 'unmark'!");
+                    System.out.println("____________________________________________________________");
+                }
             } else {
-                tasks[taskCount] = input;
+                tasks[taskCount] = new Task(input);
                 taskCount++;
                 System.out.println("____________________________________________________________");
                 System.out.println(" added: " + input);
