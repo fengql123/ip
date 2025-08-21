@@ -16,5 +16,9 @@ list
 unmark 3
 mark 5
 list
-invalid command
+todo
+blah
+deadline
+mark
+unmark
 bye

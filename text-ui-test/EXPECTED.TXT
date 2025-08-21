@@ -106,11 +106,28 @@ ____________________________________________________________
  6.[D][ ] homework (by: no idea :-p)
 ____________________________________________________________
 ____________________________________________________________
- Yo! I don't understand that command. Try:
+ OOPS!!! Yo! The description of a todo cannot be empty, my friend!
+ Make sure to include a description after the command!
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! Yo! I don't know what 'blah' means, my friend! Check out the help below.
+ Try these commands:
  - todo [description]
  - deadline [description] /by [time]
  - event [description] /from [start] /to [end]
  - list, mark [number], unmark [number], bye
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! Yo! The description of a deadline cannot be empty, my friend!
+ Make sure to include a description after the command!
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! Yo! You gotta tell me which mark task number! Use 'mark [task number]'.
+ Check the format: deadline [task] /by [time], event [task] /from [start] /to [end]
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! Yo! You gotta tell me which unmark task number! Use 'unmark [task number]'.
+ Check the format: deadline [task] /by [time], event [task] /from [start] /to [end]
 ____________________________________________________________
 ____________________________________________________________
  Peace out! Keep it real, catch you on the flip side!
