@@ -16,6 +16,8 @@ public class Kris {
         
         Scanner scanner = new Scanner(System.in);
         String input;
+        String[] tasks = new String[100];
+        int taskCount = 0;
         
         while (true) {
             input = scanner.nextLine();
@@ -26,9 +28,21 @@ public class Kris {
                 System.out.println(" Hope to see you again soon, my friend!");
                 System.out.println("____________________________________________________________");
                 break;
-            } else {
+            } else if (input.equals("list")) {
                 System.out.println("____________________________________________________________");
-                System.out.println(" " + input);
+                if (taskCount == 0) {
+                    System.out.println(" Yo! Your task list is empty, time to get busy!");
+                } else {
+                    for (int i = 0; i < taskCount; i++) {
+                        System.out.println(" " + (i + 1) + ". " + tasks[i]);
+                    }
+                }
+                System.out.println("____________________________________________________________");
+            } else {
+                tasks[taskCount] = input;
+                taskCount++;
+                System.out.println("____________________________________________________________");
+                System.out.println(" added: " + input);
                 System.out.println("____________________________________________________________");
             }
         }
