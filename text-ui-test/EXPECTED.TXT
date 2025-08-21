@@ -89,21 +89,33 @@ ____________________________________________________________
  6.[D][ ] homework (by: no idea :-p)
 ____________________________________________________________
 ____________________________________________________________
- OK, I've marked this task as not done yet:
-   [D][ ] submit report (by: Sunday)
-____________________________________________________________
-____________________________________________________________
- Nice! I've marked this task as done:
-   [T][X] buy groceries
+ Noted. I've removed this task:
+   [D][X] submit report (by: Sunday)
+ Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][ ] read book
  2.[T][X] return book
- 3.[D][ ] submit report (by: Sunday)
- 4.[E][ ] team meeting (from: Mon 2pm to: 4pm)
- 5.[T][X] buy groceries
- 6.[D][ ] homework (by: no idea :-p)
+ 3.[E][ ] team meeting (from: Mon 2pm to: 4pm)
+ 4.[T][ ] buy groceries
+ 5.[D][ ] homework (by: no idea :-p)
+____________________________________________________________
+____________________________________________________________
+ OK, I've marked this task as not done yet:
+   [E][ ] team meeting (from: Mon 2pm to: 4pm)
+____________________________________________________________
+____________________________________________________________
+ Nice! I've marked this task as done:
+   [D][X] homework (by: no idea :-p)
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[T][ ] read book
+ 2.[T][X] return book
+ 3.[E][ ] team meeting (from: Mon 2pm to: 4pm)
+ 4.[T][ ] buy groceries
+ 5.[D][X] homework (by: no idea :-p)
 ____________________________________________________________
 ____________________________________________________________
  OOPS!!! Yo! The description of a todo cannot be empty, my friend!
@@ -115,7 +127,7 @@ ____________________________________________________________
  - todo [description]
  - deadline [description] /by [time]
  - event [description] /from [start] /to [end]
- - list, mark [number], unmark [number], bye
+ - list, mark [number], unmark [number], delete [number], bye
 ____________________________________________________________
 ____________________________________________________________
  OOPS!!! Yo! The description of a deadline cannot be empty, my friend!
@@ -128,6 +140,14 @@ ____________________________________________________________
 ____________________________________________________________
  OOPS!!! Yo! You gotta tell me which unmark task number! Use 'unmark [task number]'.
  Check the format: deadline [task] /by [time], event [task] /from [start] /to [end]
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! Yo! You gotta tell me which delete task number! Use 'delete [task number]'.
+ Check the format: deadline [task] /by [time], event [task] /from [start] /to [end]
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! Yo! 'abc' ain't a valid number! Use a number like 1, 2, 3...
+ Use 'list' to see your tasks and their numbers!
 ____________________________________________________________
 ____________________________________________________________
  Peace out! Keep it real, catch you on the flip side!
