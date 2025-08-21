@@ -13,6 +13,8 @@ list
 todo buy groceries
 deadline homework /by no idea :-p
 list
+delete 3
+list
 unmark 3
 mark 5
 list
@@ -21,4 +23,6 @@ blah
 deadline
 mark
 unmark
+delete
+delete abc
 bye
