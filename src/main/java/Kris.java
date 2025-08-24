@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Kris {
@@ -16,13 +17,13 @@ public class Kris {
         
         Scanner scanner = new Scanner(System.in);
         String input;
-        Task[] tasks = new Task[100];
-        int taskCount = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
         
         while (true) {
             input = scanner.nextLine();
             
-            if (input.equals("bye")) {
+            try {
+                if (input.equals("bye")) {
                 System.out.println("____________________________________________________________");
                 System.out.println(" Peace out! Keep it real, catch you on the flip side!");
                 System.out.println(" Hope to see you again soon, my friend!");
@@ -30,64 +31,67 @@ public class Kris {
                 break;
             } else if (input.equals("list")) {
                 System.out.println("____________________________________________________________");
-                if (taskCount == 0) {
+                if (tasks.isEmpty()) {
                     System.out.println(" Yo! Your task list is empty, time to get busy!");
                 } else {
                     System.out.println(" Here are the tasks in your list:");
-                    for (int i = 0; i < taskCount; i++) {
-                        System.out.println(" " + (i + 1) + "." + tasks[i]);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(" " + (i + 1) + "." + tasks.get(i));
                     }
                 }
                 System.out.println("____________________________________________________________");
-            } else if (input.startsWith("mark ")) {
+            } else if (input.startsWith("mark")) {
+                if (input.trim().equals("mark") || input.substring(4).trim().isEmpty()) {
+                    throw new MissingParameterException("mark", "task number");
+                }
                 try {
                     int index = Integer.parseInt(input.substring(5)) - 1;
-                    if (index >= 0 && index < taskCount) {
-                        tasks[index].markAsDone();
+                    if (index >= 0 && index < tasks.size()) {
+                        tasks.get(index).markAsDone();
                         System.out.println("____________________________________________________________");
                         System.out.println(" Nice! I've marked this task as done:");
-                        System.out.println("   " + tasks[index]);
+                        System.out.println("   " + tasks.get(index));
                         System.out.println("____________________________________________________________");
                     } else {
-                        System.out.println("____________________________________________________________");
-                        System.out.println(" Yo, that task number doesn't exist in your list!");
-                        System.out.println("____________________________________________________________");
+                        throw new InvalidTaskNumberException(String.valueOf(index + 1), tasks.size());
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("____________________________________________________________");
-                    System.out.println(" Yo, gimme a valid number after 'mark'!");
-                    System.out.println("____________________________________________________________");
+                    throw new InvalidTaskNumberException(input.substring(5));
                 }
-            } else if (input.startsWith("unmark ")) {
+            } else if (input.startsWith("unmark")) {
+                if (input.trim().equals("unmark") || input.substring(6).trim().isEmpty()) {
+                    throw new MissingParameterException("unmark", "task number");
+                }
                 try {
                     int index = Integer.parseInt(input.substring(7)) - 1;
-                    if (index >= 0 && index < taskCount) {
-                        tasks[index].markAsNotDone();
+                    if (index >= 0 && index < tasks.size()) {
+                        tasks.get(index).markAsNotDone();
                         System.out.println("____________________________________________________________");
                         System.out.println(" OK, I've marked this task as not done yet:");
-                        System.out.println("   " + tasks[index]);
+                        System.out.println("   " + tasks.get(index));
                         System.out.println("____________________________________________________________");
                     } else {
-                        System.out.println("____________________________________________________________");
-                        System.out.println(" Yo, that task number doesn't exist in your list!");
-                        System.out.println("____________________________________________________________");
+                        throw new InvalidTaskNumberException(String.valueOf(index + 1), tasks.size());
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("____________________________________________________________");
-                    System.out.println(" Yo, gimme a valid number after 'unmark'!");
-                    System.out.println("____________________________________________________________");
+                    throw new InvalidTaskNumberException(input.substring(7));
                 }
-            } else if (input.startsWith("todo ")) {
+            } else if (input.startsWith("todo")) {
+                if (input.trim().equals("todo") || input.substring(4).trim().isEmpty()) {
+                    throw new EmptyDescriptionException("todo");
+                }
                 String description = input.substring(5);
                 Task newTask = new Todo(description);
-                tasks[taskCount] = newTask;
-                taskCount++;
+                tasks.add(newTask);
                 System.out.println("____________________________________________________________");
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("   " + newTask);
-                System.out.println(" Now you have " + taskCount + " tasks in the list.");
+                System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
                 System.out.println("____________________________________________________________");
-            } else if (input.startsWith("deadline ")) {
+            } else if (input.startsWith("deadline")) {
+                if (input.trim().equals("deadline") || input.substring(8).trim().isEmpty()) {
+                    throw new EmptyDescriptionException("deadline");
+                }
                 int byIndex = input.indexOf("/by ");
                 if (byIndex == -1) {
                     System.out.println("____________________________________________________________");
@@ -97,12 +101,11 @@ public class Kris {
                     String description = input.substring(9, byIndex).trim();
                     String by = input.substring(byIndex + 4).trim();
                     Task newTask = new Deadline(description, by);
-                    tasks[taskCount] = newTask;
-                    taskCount++;
+                    tasks.add(newTask);
                     System.out.println("____________________________________________________________");
                     System.out.println(" Got it. I've added this task:");
                     System.out.println("   " + newTask);
-                    System.out.println(" Now you have " + taskCount + " tasks in the list.");
+                    System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
                 }
             } else if (input.startsWith("event ")) {
@@ -117,21 +120,58 @@ public class Kris {
                     String from = input.substring(fromIndex + 6, toIndex).trim();
                     String to = input.substring(toIndex + 4).trim();
                     Task newTask = new Event(description, from, to);
-                    tasks[taskCount] = newTask;
-                    taskCount++;
+                    tasks.add(newTask);
                     System.out.println("____________________________________________________________");
                     System.out.println(" Got it. I've added this task:");
                     System.out.println("   " + newTask);
-                    System.out.println(" Now you have " + taskCount + " tasks in the list.");
+                    System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
                 }
-            } else {
+            } else if (input.startsWith("delete")) {
+                if (input.trim().equals("delete") || input.substring(6).trim().isEmpty()) {
+                    throw new MissingParameterException("delete", "task number");
+                }
+                try {
+                    int index = Integer.parseInt(input.substring(7)) - 1;
+                    if (index >= 0 && index < tasks.size()) {
+                        Task deletedTask = tasks.remove(index);
+                        System.out.println("____________________________________________________________");
+                        System.out.println(" Noted. I've removed this task:");
+                        System.out.println("   " + deletedTask);
+                        System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
+                        System.out.println("____________________________________________________________");
+                    } else {
+                        throw new InvalidTaskNumberException(String.valueOf(index + 1), tasks.size());
+                    }
+                } catch (NumberFormatException e) {
+                    throw new InvalidTaskNumberException(input.substring(7));
+                }
+                } else {
+                    throw new InvalidCommandException(input);
+                }
+            } catch (EmptyDescriptionException e) {
                 System.out.println("____________________________________________________________");
-                System.out.println(" Yo! I don't understand that command. Try:");
+                System.out.println(" OOPS!!! " + e.getMessage());
+                System.out.println(" Make sure to include a description after the command!");
+                System.out.println("____________________________________________________________");
+            } catch (MissingParameterException e) {
+                System.out.println("____________________________________________________________");
+                System.out.println(" OOPS!!! " + e.getMessage());
+                System.out.println(" Check the format: deadline [task] /by [time], event [task] /from [start] /to [end]");
+                System.out.println("____________________________________________________________");
+            } catch (InvalidTaskNumberException e) {
+                System.out.println("____________________________________________________________");
+                System.out.println(" OOPS!!! " + e.getMessage());
+                System.out.println(" Use 'list' to see your tasks and their numbers!");
+                System.out.println("____________________________________________________________");
+            } catch (InvalidCommandException e) {
+                System.out.println("____________________________________________________________");
+                System.out.println(" OOPS!!! " + e.getMessage());
+                System.out.println(" Try these commands:");
                 System.out.println(" - todo [description]");
                 System.out.println(" - deadline [description] /by [time]");
                 System.out.println(" - event [description] /from [start] /to [end]");
-                System.out.println(" - list, mark [number], unmark [number], bye");
+                System.out.println(" - list, mark [number], unmark [number], delete [number], bye");
                 System.out.println("____________________________________________________________");
             }
         }

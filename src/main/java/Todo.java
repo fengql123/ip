@@ -5,7 +5,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toString() {
-        return "[T]" + super.toString();
+    public TaskType getTaskType() {
+        return TaskType.TODO;
     }
 }
