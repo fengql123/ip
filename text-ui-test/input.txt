@@ -4,14 +4,14 @@ list
 mark 1
 list
 unmark 1
-deadline submit report /by Sunday
-event team meeting /from Mon 2pm /to 4pm
+deadline submit report /by 2019-10-15
+event team meeting /from 2019-10-16 1400 /to 2019-10-16 1600
 list
 mark 2
 mark 3
 list
 todo buy groceries
-deadline homework /by no idea :-p
+deadline homework /by 2019-12-01 2359
 list
 delete 3
 list

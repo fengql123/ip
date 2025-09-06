@@ -1,10 +1,14 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime by;
+    protected String originalByString;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.originalByString = by;
+        this.by = DateParser.parseDateTime(by);
     }
 
     @Override
@@ -14,11 +18,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return getTaskType() + "[" + getStatusIcon() + "] " + description + " (by: " + by + ")";
+        String dateString = (by != null) ? DateParser.formatDateTime(by) : originalByString;
+        return getTaskType() + "[" + getStatusIcon() + "] " + description + " (by: " + dateString + ")";
     }
     
     @Override
     public String toFileString() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + by;
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + originalByString;
     }
 }
