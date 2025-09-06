@@ -1,3 +1,8 @@
+package kris;
+
+import kris.command.Command;
+import kris.exception.KrisException;
+
 public class Kris {
     private Storage storage;
     private TaskList tasks;

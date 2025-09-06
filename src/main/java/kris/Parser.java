@@ -1,3 +1,25 @@
+package kris;
+
+import kris.command.ByeCommand;
+import kris.command.ListCommand;
+import kris.command.MarkCommand;
+import kris.command.UnmarkCommand;
+import kris.command.TodoCommand;
+import kris.command.DeadlineCommand;
+import kris.command.EventCommand;
+import kris.command.DeleteCommand;
+import kris.command.Command;
+import kris.task.Todo;
+import kris.task.Deadline;
+import kris.task.Event;
+import kris.exception.KrisException;
+import kris.exception.InvalidCommandException;
+import kris.exception.MissingParameterException;
+import kris.exception.InvalidTaskNumberException;
+import kris.exception.EmptyDescriptionException;
+import kris.exception.InvalidDateFormatException;
+import kris.util.DateParser;
+
 public class Parser {
     
     public static Command parse(String input) throws KrisException {
@@ -55,8 +77,6 @@ public class Parser {
     }
     
     public static Deadline parseDeadline(String input) throws EmptyDescriptionException, InvalidDateFormatException, KrisException {
-        String description = parseDescription(input, "deadline");
-        
         int byIndex = input.indexOf("/by ");
         if (byIndex == -1) {
             throw new KrisException("Yo! Use '/by' to specify the deadline!");
