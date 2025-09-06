@@ -1,12 +1,18 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
+    protected String originalFromString;
+    protected String originalToString;
 
     public Event(String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.originalFromString = from;
+        this.originalToString = to;
+        this.from = DateParser.parseDateTime(from);
+        this.to = DateParser.parseDateTime(to);
     }
 
     @Override
@@ -16,11 +22,13 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return getTaskType() + "[" + getStatusIcon() + "] " + description + " (from: " + from + " to: " + to + ")";
+        String fromString = (from != null) ? DateParser.formatDateTime(from) : originalFromString;
+        String toString = (to != null) ? DateParser.formatDateTime(to) : originalToString;
+        return getTaskType() + "[" + getStatusIcon() + "] " + description + " (from: " + fromString + " to: " + toString + ")";
     }
     
     @Override
     public String toFileString() {
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from + " | " + to;
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + originalFromString + " | " + originalToString;
     }
 }

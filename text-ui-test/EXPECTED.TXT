@@ -39,20 +39,20 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] submit report (by: Sunday)
+   [D][ ] submit report (by: Oct 15 2019)
  Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [E][ ] team meeting (from: Mon 2pm to: 4pm)
+   [E][ ] team meeting (from: Oct 16 2019 1400hrs to: Oct 16 2019 1600hrs)
  Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][ ] read book
  2.[T][ ] return book
- 3.[D][ ] submit report (by: Sunday)
- 4.[E][ ] team meeting (from: Mon 2pm to: 4pm)
+ 3.[D][ ] submit report (by: Oct 15 2019)
+ 4.[E][ ] team meeting (from: Oct 16 2019 1400hrs to: Oct 16 2019 1600hrs)
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
@@ -60,14 +60,14 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
-   [D][X] submit report (by: Sunday)
+   [D][X] submit report (by: Oct 15 2019)
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][ ] read book
  2.[T][X] return book
- 3.[D][X] submit report (by: Sunday)
- 4.[E][ ] team meeting (from: Mon 2pm to: 4pm)
+ 3.[D][X] submit report (by: Oct 15 2019)
+ 4.[E][ ] team meeting (from: Oct 16 2019 1400hrs to: Oct 16 2019 1600hrs)
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
@@ -76,46 +76,46 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] homework (by: no idea :-p)
+   [D][ ] homework (by: Dec 01 2019 2359hrs)
  Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][ ] read book
  2.[T][X] return book
- 3.[D][X] submit report (by: Sunday)
- 4.[E][ ] team meeting (from: Mon 2pm to: 4pm)
+ 3.[D][X] submit report (by: Oct 15 2019)
+ 4.[E][ ] team meeting (from: Oct 16 2019 1400hrs to: Oct 16 2019 1600hrs)
  5.[T][ ] buy groceries
- 6.[D][ ] homework (by: no idea :-p)
+ 6.[D][ ] homework (by: Dec 01 2019 2359hrs)
 ____________________________________________________________
 ____________________________________________________________
  Noted. I've removed this task:
-   [D][X] submit report (by: Sunday)
+   [D][X] submit report (by: Oct 15 2019)
  Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][ ] read book
  2.[T][X] return book
- 3.[E][ ] team meeting (from: Mon 2pm to: 4pm)
+ 3.[E][ ] team meeting (from: Oct 16 2019 1400hrs to: Oct 16 2019 1600hrs)
  4.[T][ ] buy groceries
- 5.[D][ ] homework (by: no idea :-p)
+ 5.[D][ ] homework (by: Dec 01 2019 2359hrs)
 ____________________________________________________________
 ____________________________________________________________
  OK, I've marked this task as not done yet:
-   [E][ ] team meeting (from: Mon 2pm to: 4pm)
+   [E][ ] team meeting (from: Oct 16 2019 1400hrs to: Oct 16 2019 1600hrs)
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
-   [D][X] homework (by: no idea :-p)
+   [D][X] homework (by: Dec 01 2019 2359hrs)
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][ ] read book
  2.[T][X] return book
- 3.[E][ ] team meeting (from: Mon 2pm to: 4pm)
+ 3.[E][ ] team meeting (from: Oct 16 2019 1400hrs to: Oct 16 2019 1600hrs)
  4.[T][ ] buy groceries
- 5.[D][X] homework (by: no idea :-p)
+ 5.[D][X] homework (by: Dec 01 2019 2359hrs)
 ____________________________________________________________
 ____________________________________________________________
  OOPS!!! Yo! The description of a todo cannot be empty, my friend!

@@ -60,6 +60,10 @@ public class Kris {
                 System.out.println(" OOPS!!! " + e.getMessage());
                 System.out.println(" Use 'list' to see your tasks and their numbers!");
                 System.out.println(DIVIDER);
+            } catch (InvalidDateFormatException e) {
+                System.out.println(DIVIDER);
+                System.out.println(" OOPS!!! " + e.getMessage());
+                System.out.println(DIVIDER);
             } catch (InvalidCommandException e) {
                 System.out.println(DIVIDER);
                 System.out.println(" OOPS!!! " + e.getMessage());
@@ -181,7 +185,7 @@ public class Kris {
         showTaskAdded(newTask);
     }
     
-    private static void handleDeadlineCommand(String input) throws EmptyDescriptionException {
+    private static void handleDeadlineCommand(String input) throws EmptyDescriptionException, InvalidDateFormatException {
         if (input.trim().equals("deadline") || input.substring(8).trim().isEmpty()) {
             throw new EmptyDescriptionException("deadline");
         }
@@ -193,13 +197,19 @@ public class Kris {
         } else {
             String description = input.substring(9, byIndex).trim();
             String by = input.substring(byIndex + 4).trim();
+            
+            // Validate date format
+            if (!DateParser.isValidDateTime(by)) {
+                throw new InvalidDateFormatException(by);
+            }
+            
             Task newTask = new Deadline(description, by);
             taskManager.addTask(newTask);
             showTaskAdded(newTask);
         }
     }
     
-    private static void handleEventCommand(String input) {
+    private static void handleEventCommand(String input) throws InvalidDateFormatException {
         int fromIndex = input.indexOf("/from ");
         int toIndex = input.indexOf("/to ");
         if (fromIndex == -1 || toIndex == -1) {
@@ -210,6 +220,15 @@ public class Kris {
             String description = input.substring(6, fromIndex).trim();
             String from = input.substring(fromIndex + 6, toIndex).trim();
             String to = input.substring(toIndex + 4).trim();
+            
+            // Validate date formats
+            if (!DateParser.isValidDateTime(from)) {
+                throw new InvalidDateFormatException(from);
+            }
+            if (!DateParser.isValidDateTime(to)) {
+                throw new InvalidDateFormatException(to);
+            }
+            
             Task newTask = new Event(description, from, to);
             taskManager.addTask(newTask);
             showTaskAdded(newTask);
