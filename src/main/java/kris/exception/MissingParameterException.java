@@ -1,3 +1,5 @@
+package kris.exception;
+
 public class MissingParameterException extends KrisException {
     public MissingParameterException(String command, String parameter) {
         super("Yo! You gotta tell me which " + command + " " + parameter + "! Use '" + command + " [" + parameter + "]'.");

@@ -1,3 +1,12 @@
+package kris.command;
+
+import kris.TaskList;
+import kris.Ui;
+import kris.Storage;
+import kris.Parser;
+import kris.task.Task;
+import kris.exception.KrisException;
+
 public class MarkCommand extends Command {
     private String input;
     

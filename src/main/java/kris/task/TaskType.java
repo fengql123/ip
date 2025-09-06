@@ -1,3 +1,5 @@
+package kris.task;
+
 public enum TaskType {
     TODO("T"),
     DEADLINE("D"),

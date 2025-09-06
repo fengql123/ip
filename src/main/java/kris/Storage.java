@@ -1,3 +1,5 @@
+package kris;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,6 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import kris.task.Task;
+import kris.task.Todo;
+import kris.task.Deadline;
+import kris.task.Event;
+import kris.exception.KrisException;
 
 public class Storage {
     private String filePath;

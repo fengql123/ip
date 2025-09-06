@@ -1,3 +1,5 @@
+package kris.exception;
+
 public class InvalidDateFormatException extends KrisException {
     public InvalidDateFormatException(String invalidDate) {
         super("Yo! I can't understand the date '" + invalidDate + "'! " +

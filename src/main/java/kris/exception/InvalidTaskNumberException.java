@@ -1,3 +1,5 @@
+package kris.exception;
+
 public class InvalidTaskNumberException extends KrisException {
     public InvalidTaskNumberException(String taskNumber, int totalTasks) {
         super("Yo! Task number " + taskNumber + " doesn't exist! You have " + totalTasks + " tasks.");
