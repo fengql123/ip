@@ -7,9 +7,18 @@ import kris.Parser;
 import kris.task.Task;
 import kris.exception.KrisException;
 
+/**
+ * Command that marks a task as not completed.
+ * Takes a task number and updates the task's completion status to not done.
+ */
 public class UnmarkCommand extends Command {
     private String input;
     
+    /**
+     * Constructs an UnmarkCommand with the specified input containing the task number.
+     *
+     * @param input The input string containing the task number to unmark.
+     */
     public UnmarkCommand(String input) {
         this.input = input;
     }

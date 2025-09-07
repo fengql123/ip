@@ -5,10 +5,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Utility class for parsing and formatting dates and times.
+ * Supports multiple date formats and handles conversion between strings and LocalDate/LocalDateTime objects.
+ */
 public class DateParser {
     private static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm'hrs'");
     
+    /**
+     * Parses a date string into a LocalDate object.
+     * Supports multiple date formats including yyyy-MM-dd, d/M/yyyy, and variations.
+     *
+     * @param dateString The date string to parse.
+     * @return LocalDate object if parsing succeeds, null otherwise.
+     */
     public static LocalDate parseDate(String dateString) {
         if (dateString == null || dateString.trim().isEmpty()) {
             return null;
@@ -34,6 +45,13 @@ public class DateParser {
         return null; // Unable to parse
     }
     
+    /**
+     * Parses a date-time string into a LocalDateTime object.
+     * Supports multiple datetime formats with optional time component.
+     *
+     * @param dateTimeString The date-time string to parse.
+     * @return LocalDateTime object if parsing succeeds, null otherwise.
+     */
     public static LocalDateTime parseDateTime(String dateTimeString) {
         if (dateTimeString == null || dateTimeString.trim().isEmpty()) {
             return null;
@@ -65,11 +83,23 @@ public class DateParser {
         return null; // Unable to parse
     }
     
+    /**
+     * Checks if the input string contains time information.
+     *
+     * @param input The input string to check.
+     * @return true if the input contains time (4 consecutive digits), false otherwise.
+     */
     public static boolean hasTime(String input) {
         // Simple check to see if input contains time (4 digits in a row)
         return input != null && input.matches(".*\\d{4}.*");
     }
     
+    /**
+     * Formats a LocalDate object into a readable string.
+     *
+     * @param date The LocalDate to format.
+     * @return Formatted date string in "MMM dd yyyy" format, or empty string if null.
+     */
     public static String formatDate(LocalDate date) {
         if (date == null) {
             return "";
@@ -77,6 +107,13 @@ public class DateParser {
         return date.format(OUTPUT_DATE_FORMAT);
     }
     
+    /**
+     * Formats a LocalDateTime object into a readable string.
+     * Shows date only if time is midnight, otherwise includes time.
+     *
+     * @param dateTime The LocalDateTime to format.
+     * @return Formatted date-time string, or empty string if null.
+     */
     public static String formatDateTime(LocalDateTime dateTime) {
         if (dateTime == null) {
             return "";
@@ -90,10 +127,22 @@ public class DateParser {
         return dateTime.format(OUTPUT_DATETIME_FORMAT);
     }
     
+    /**
+     * Validates if a date string can be parsed.
+     *
+     * @param dateString The date string to validate.
+     * @return true if the string can be parsed as a valid date, false otherwise.
+     */
     public static boolean isValidDate(String dateString) {
         return parseDate(dateString) != null;
     }
     
+    /**
+     * Validates if a date-time string can be parsed.
+     *
+     * @param dateTimeString The date-time string to validate.
+     * @return true if the string can be parsed as a valid date-time, false otherwise.
+     */
     public static boolean isValidDateTime(String dateTimeString) {
         return parseDateTime(dateTimeString) != null;
     }

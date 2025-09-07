@@ -7,9 +7,18 @@ import kris.Parser;
 import kris.task.Task;
 import kris.exception.KrisException;
 
+/**
+ * Command that deletes a task from the task list.
+ * Takes a task number and removes the corresponding task from the list.
+ */
 public class DeleteCommand extends Command {
     private String input;
     
+    /**
+     * Constructs a DeleteCommand with the specified input containing the task number.
+     *
+     * @param input The input string containing the task number to delete.
+     */
     public DeleteCommand(String input) {
         this.input = input;
     }
