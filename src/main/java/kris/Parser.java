@@ -25,7 +25,7 @@ import kris.util.DateParser;
  * Handles all command types and validates input format.
  */
 public class Parser {
-    
+
     /**
      * Parses user input string and returns the corresponding command.
      * Recognizes commands: bye, list, mark, unmark, todo, deadline, event, delete.
@@ -36,7 +36,7 @@ public class Parser {
      */
     public static Command parse(String input) throws KrisException {
         input = input.trim();
-        
+
         if (input.equals("bye")) {
             return new ByeCommand();
         } else if (input.equals("list")) {
@@ -57,7 +57,7 @@ public class Parser {
             throw new InvalidCommandException(input);
         }
     }
-    
+
     /**
      * Parses task number from user input for commands that require a task index.
      * Validates that the number is present and is a valid positive integer.
@@ -68,12 +68,13 @@ public class Parser {
      * @throws MissingParameterException If no task number is provided.
      * @throws InvalidTaskNumberException If the task number is not a valid positive integer.
      */
-    public static int parseTaskNumber(String input, String commandWord) throws MissingParameterException, InvalidTaskNumberException {
+    public static int parseTaskNumber(String input, String commandWord)
+            throws MissingParameterException, InvalidTaskNumberException {
         String[] parts = input.split(" ", 2);
         if (parts.length < 2 || parts[1].trim().isEmpty()) {
             throw new MissingParameterException(commandWord, "task number");
         }
-        
+
         try {
             int taskNumber = Integer.parseInt(parts[1].trim());
             if (taskNumber <= 0) {
@@ -84,7 +85,7 @@ public class Parser {
             throw new InvalidTaskNumberException(parts[1].trim());
         }
     }
-    
+
     /**
      * Parses task description from user input.
      * Validates that a non-empty description is provided.
@@ -101,7 +102,7 @@ public class Parser {
         }
         return parts[1].trim();
     }
-    
+
     /**
      * Parses a todo command and creates a Todo task.
      * Validates that a description is provided.
@@ -114,7 +115,7 @@ public class Parser {
         String description = parseDescription(input, "todo");
         return new Todo(description);
     }
-    
+
     /**
      * Parses a deadline command and creates a Deadline task.
      * Validates description and date format. Supports multiple date formats.
@@ -125,22 +126,23 @@ public class Parser {
      * @throws InvalidDateFormatException If the date format is invalid.
      * @throws KrisException If the '/by' keyword is missing.
      */
-    public static Deadline parseDeadline(String input) throws EmptyDescriptionException, InvalidDateFormatException, KrisException {
+    public static Deadline parseDeadline(String input)
+            throws EmptyDescriptionException, InvalidDateFormatException, KrisException {
         int byIndex = input.indexOf("/by ");
         if (byIndex == -1) {
             throw new KrisException("Yo! Use '/by' to specify the deadline!");
         }
-        
+
         String taskDescription = input.substring(9, byIndex).trim();
         String by = input.substring(byIndex + 4).trim();
-        
+
         if (!DateParser.isValidDateTime(by)) {
             throw new InvalidDateFormatException(by);
         }
-        
+
         return new Deadline(taskDescription, by);
     }
-    
+
     /**
      * Parses an event command and creates an Event task.
      * Validates description and date formats for both start and end times.
@@ -153,22 +155,22 @@ public class Parser {
     public static Event parseEvent(String input) throws InvalidDateFormatException, KrisException {
         int fromIndex = input.indexOf("/from ");
         int toIndex = input.indexOf("/to ");
-        
+
         if (fromIndex == -1 || toIndex == -1) {
             throw new KrisException("Yo! Use '/from' and '/to' to specify the event time!");
         }
-        
+
         String description = input.substring(6, fromIndex).trim();
         String from = input.substring(fromIndex + 6, toIndex).trim();
         String to = input.substring(toIndex + 4).trim();
-        
+
         if (!DateParser.isValidDateTime(from)) {
             throw new InvalidDateFormatException(from);
         }
         if (!DateParser.isValidDateTime(to)) {
             throw new InvalidDateFormatException(to);
         }
-        
+
         return new Event(description, from, to);
     }
 }

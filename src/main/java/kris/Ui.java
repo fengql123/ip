@@ -16,11 +16,11 @@ import kris.exception.KrisException;
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
     private Scanner scanner;
-    
+
     public Ui() {
         scanner = new Scanner(System.in);
     }
-    
+
     /**
      * Displays the welcome message with application logo and greeting.
      */
@@ -31,13 +31,13 @@ public class Ui {
                 + "| . \\| |  | \\__ \\\n"
                 + "|_|\\_\\_|  |_|___/\n";
         System.out.println("Hello from\n" + logo);
-        
+
         showLine();
         System.out.println(" Yo yo yo! I'm Kris, your rap bot extraordinaire!");
         System.out.println(" Drop me some beats... I mean commands! What can I do for you?");
         showLine();
     }
-    
+
     /**
      * Displays the goodbye message when the user exits the application.
      */
@@ -47,11 +47,11 @@ public class Ui {
         System.out.println(" Hope to see you again soon, my friend!");
         showLine();
     }
-    
+
     public void showLine() {
         System.out.println(DIVIDER);
     }
-    
+
     /**
      * Reads a line of user input from the console.
      *
@@ -60,7 +60,7 @@ public class Ui {
     public String readCommand() {
         return scanner.nextLine();
     }
-    
+
     /**
      * Displays all tasks in the task list with proper formatting.
      * Shows a message if the list is empty.
@@ -84,7 +84,7 @@ public class Ui {
         }
         showLine();
     }
-    
+
     /**
      * Displays confirmation message when a task is successfully added.
      *
@@ -98,7 +98,7 @@ public class Ui {
         System.out.println(" Now you have " + taskCount + " tasks in the list.");
         showLine();
     }
-    
+
     /**
      * Displays confirmation message when a task is marked as done.
      *
@@ -110,7 +110,7 @@ public class Ui {
         System.out.println("   " + task);
         showLine();
     }
-    
+
     /**
      * Displays confirmation message when a task is marked as not done.
      *
@@ -122,7 +122,7 @@ public class Ui {
         System.out.println("   " + task);
         showLine();
     }
-    
+
     /**
      * Displays confirmation message when a task is deleted.
      *
@@ -136,35 +136,35 @@ public class Ui {
         System.out.println(" Now you have " + taskCount + " tasks in the list.");
         showLine();
     }
-    
+
     public void showError(String message) {
         showLine();
         System.out.println(" OOPS!!! " + message);
     }
-    
+
     public void showEmptyDescriptionError(EmptyDescriptionException e) {
         showError(e.getMessage());
         System.out.println(" Make sure to include a description after the command!");
         showLine();
     }
-    
+
     public void showMissingParameterError(MissingParameterException e) {
         showError(e.getMessage());
         System.out.println(" Check the format: deadline [task] /by [time], event [task] /from [start] /to [end]");
         showLine();
     }
-    
+
     public void showInvalidTaskNumberError(InvalidTaskNumberException e) {
         showError(e.getMessage());
         System.out.println(" Use 'list' to see your tasks and their numbers!");
         showLine();
     }
-    
+
     public void showInvalidDateFormatError(InvalidDateFormatException e) {
         showError(e.getMessage());
         showLine();
     }
-    
+
     public void showInvalidCommandError(InvalidCommandException e) {
         showError(e.getMessage());
         System.out.println(" Try these commands:");
@@ -174,18 +174,18 @@ public class Ui {
         System.out.println(" - list, mark [number], unmark [number], delete [number], bye");
         showLine();
     }
-    
+
     public void showKrisError(KrisException e) {
         showError(e.getMessage());
         showLine();
     }
-    
+
     public void showLoadingError() {
         showLine();
         System.out.println(" Yo! Couldn't load your previous tasks, starting fresh!");
         showLine();
     }
-    
+
     public void close() {
         scanner.close();
     }

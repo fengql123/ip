@@ -11,8 +11,9 @@ import java.time.format.DateTimeParseException;
  */
 public class DateParser {
     private static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm'hrs'");
-    
+    private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter
+            .ofPattern("MMM dd yyyy HHmm'hrs'");
+
     /**
      * Parses a date string into a LocalDate object.
      * Supports multiple date formats including yyyy-MM-dd, d/M/yyyy, and variations.
@@ -24,16 +25,16 @@ public class DateParser {
         if (dateString == null || dateString.trim().isEmpty()) {
             return null;
         }
-        
+
         // Try different date formats
         DateTimeFormatter[] formats = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd"),     // 2019-12-02
-            DateTimeFormatter.ofPattern("d/M/yyyy"),       // 2/12/2019
-            DateTimeFormatter.ofPattern("dd/MM/yyyy"),     // 02/12/2019
-            DateTimeFormatter.ofPattern("d-M-yyyy"),       // 2-12-2019
-            DateTimeFormatter.ofPattern("dd-MM-yyyy")      // 02-12-2019
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"), // 2019-12-02
+                DateTimeFormatter.ofPattern("d/M/yyyy"), // 2/12/2019
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"), // 02/12/2019
+                DateTimeFormatter.ofPattern("d-M-yyyy"), // 2-12-2019
+                DateTimeFormatter.ofPattern("dd-MM-yyyy") // 02-12-2019
         };
-        
+
         for (DateTimeFormatter format : formats) {
             try {
                 return LocalDate.parse(dateString.trim(), format);
@@ -41,10 +42,10 @@ public class DateParser {
                 // Try next format
             }
         }
-        
+
         return null; // Unable to parse
     }
-    
+
     /**
      * Parses a date-time string into a LocalDateTime object.
      * Supports multiple datetime formats with optional time component.
@@ -56,16 +57,16 @@ public class DateParser {
         if (dateTimeString == null || dateTimeString.trim().isEmpty()) {
             return null;
         }
-        
+
         // Try different datetime formats first
         DateTimeFormatter[] dateTimeFormats = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),    // 2019-12-02 1800
-            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),      // 2/12/2019 1800
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"),    // 02/12/2019 1800
-            DateTimeFormatter.ofPattern("d-M-yyyy HHmm"),      // 2-12-2019 1800
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")     // 02-12-2019 1800
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), // 2019-12-02 1800
+                DateTimeFormatter.ofPattern("d/M/yyyy HHmm"), // 2/12/2019 1800
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"), // 02/12/2019 1800
+                DateTimeFormatter.ofPattern("d-M-yyyy HHmm"), // 2-12-2019 1800
+                DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm") // 02-12-2019 1800
         };
-        
+
         for (DateTimeFormatter format : dateTimeFormats) {
             try {
                 return LocalDateTime.parse(dateTimeString.trim(), format);
@@ -73,16 +74,16 @@ public class DateParser {
                 // Try next format
             }
         }
-        
+
         // If no time found, try parsing as date only
         LocalDate date = parseDate(dateTimeString);
         if (date != null) {
             return date.atStartOfDay();
         }
-        
+
         return null; // Unable to parse
     }
-    
+
     /**
      * Checks if the input string contains time information.
      *
@@ -93,7 +94,7 @@ public class DateParser {
         // Simple check to see if input contains time (4 digits in a row)
         return input != null && input.matches(".*\\d{4}.*");
     }
-    
+
     /**
      * Formats a LocalDate object into a readable string.
      *
@@ -106,7 +107,7 @@ public class DateParser {
         }
         return date.format(OUTPUT_DATE_FORMAT);
     }
-    
+
     /**
      * Formats a LocalDateTime object into a readable string.
      * Shows date only if time is midnight, otherwise includes time.
@@ -118,15 +119,15 @@ public class DateParser {
         if (dateTime == null) {
             return "";
         }
-        
+
         // If time is start of day (00:00), show date only
         if (dateTime.getHour() == 0 && dateTime.getMinute() == 0) {
             return dateTime.format(OUTPUT_DATE_FORMAT);
         }
-        
+
         return dateTime.format(OUTPUT_DATETIME_FORMAT);
     }
-    
+
     /**
      * Validates if a date string can be parsed.
      *
@@ -136,7 +137,7 @@ public class DateParser {
     public static boolean isValidDate(String dateString) {
         return parseDate(dateString) != null;
     }
-    
+
     /**
      * Validates if a date-time string can be parsed.
      *

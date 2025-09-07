@@ -13,7 +13,7 @@ import kris.exception.KrisException;
  */
 public class DeleteCommand extends Command {
     private String input;
-    
+
     /**
      * Constructs a DeleteCommand with the specified input containing the task number.
      *
@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String input) {
         this.input = input;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws KrisException {
         int taskNumber = Parser.parseTaskNumber(input, "delete");
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
         ui.showTaskDeleted(deletedTask, tasks.size());
         storage.save(tasks.getTasks());
     }
-    
+
     @Override
     public boolean isExit() {
         return false;
