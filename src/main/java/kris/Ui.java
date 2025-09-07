@@ -9,6 +9,10 @@ import kris.exception.InvalidDateFormatException;
 import kris.exception.InvalidCommandException;
 import kris.exception.KrisException;
 
+/**
+ * Handles all user interface interactions for the Kris application.
+ * Manages input reading, output display, and formatting of messages.
+ */
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
     private Scanner scanner;
@@ -17,6 +21,9 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
     
+    /**
+     * Displays the welcome message with application logo and greeting.
+     */
     public void showWelcome() {
         String logo = " _  __     _     \n"
                 + "| |/ /_ __(_)___ \n"
@@ -31,6 +38,9 @@ public class Ui {
         showLine();
     }
     
+    /**
+     * Displays the goodbye message when the user exits the application.
+     */
     public void showGoodbye() {
         showLine();
         System.out.println(" Peace out! Keep it real, catch you on the flip side!");
@@ -42,10 +52,21 @@ public class Ui {
         System.out.println(DIVIDER);
     }
     
+    /**
+     * Reads a line of user input from the console.
+     *
+     * @return User input as a string.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
     
+    /**
+     * Displays all tasks in the task list with proper formatting.
+     * Shows a message if the list is empty.
+     *
+     * @param tasks TaskList containing all user tasks.
+     */
     public void showTasks(TaskList tasks) {
         showLine();
         if (tasks.isEmpty()) {
@@ -64,6 +85,12 @@ public class Ui {
         showLine();
     }
     
+    /**
+     * Displays confirmation message when a task is successfully added.
+     *
+     * @param task Task that was added.
+     * @param taskCount Total number of tasks after addition.
+     */
     public void showTaskAdded(Task task, int taskCount) {
         showLine();
         System.out.println(" Got it. I've added this task:");
@@ -72,6 +99,11 @@ public class Ui {
         showLine();
     }
     
+    /**
+     * Displays confirmation message when a task is marked as done.
+     *
+     * @param task Task that was marked as done.
+     */
     public void showTaskMarked(Task task) {
         showLine();
         System.out.println(" Nice! I've marked this task as done:");
@@ -79,6 +111,11 @@ public class Ui {
         showLine();
     }
     
+    /**
+     * Displays confirmation message when a task is marked as not done.
+     *
+     * @param task Task that was unmarked.
+     */
     public void showTaskUnmarked(Task task) {
         showLine();
         System.out.println(" OK, I've marked this task as not done yet:");
@@ -86,6 +123,12 @@ public class Ui {
         showLine();
     }
     
+    /**
+     * Displays confirmation message when a task is deleted.
+     *
+     * @param task Task that was deleted.
+     * @param taskCount Total number of tasks after deletion.
+     */
     public void showTaskDeleted(Task task, int taskCount) {
         showLine();
         System.out.println(" Noted. I've removed this task:");

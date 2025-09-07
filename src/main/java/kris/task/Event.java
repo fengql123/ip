@@ -3,6 +3,10 @@ package kris.task;
 import java.time.LocalDateTime;
 import kris.util.DateParser;
 
+/**
+ * Represents an event task with a specific time period.
+ * Contains a description, start time, and end time for the event.
+ */
 public class Event extends Task {
 
     protected LocalDateTime from;
@@ -10,6 +14,14 @@ public class Event extends Task {
     protected String originalFromString;
     protected String originalToString;
 
+    /**
+     * Constructs an Event task with the specified description, start time, and end time.
+     * Attempts to parse both time strings into LocalDateTime objects.
+     *
+     * @param description Description of the event.
+     * @param from Start date/time as a string in various supported formats.
+     * @param to End date/time as a string in various supported formats.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.originalFromString = from;
