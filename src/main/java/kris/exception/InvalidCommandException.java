@@ -11,6 +11,6 @@ public class InvalidCommandException extends KrisException {
                " - todo [description]\n" +
                " - deadline [description] /by [time]\n" +
                " - event [description] /from [start] /to [end]\n" +
-               " - list, mark [number], unmark [number], delete [number], bye";
+               " - list, mark [number], unmark [number], delete [number], find [keyword], bye";
     }
 }

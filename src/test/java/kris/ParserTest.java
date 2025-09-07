@@ -11,6 +11,7 @@ import kris.task.Todo;
 import kris.task.Deadline;
 import kris.task.Event;
 import kris.command.Command;
+import kris.command.FindCommand;
 
 public class ParserTest {
     
@@ -102,5 +103,25 @@ public class ParserTest {
         assertThrows(Exception.class, () -> {
             Parser.parseTaskNumber("mark", "mark");
         });
+    }
+    
+    @Test
+    public void parse_findCommand_returnsFindCommand() throws Exception {
+        Command command = Parser.parse("find book");
+        assertTrue(command instanceof FindCommand);
+    }
+    
+    @Test
+    public void parse_findCommandWithKeyword_returnsFindCommand() throws Exception {
+        Command command = Parser.parse("find test keyword");
+        assertTrue(command instanceof FindCommand);
+        assertFalse(command.isExit());
+    }
+    
+    @Test
+    public void parse_findEmptyKeyword_returnsFindCommand() throws Exception {
+        // Parser should return FindCommand, but execution will throw EmptyDescriptionException
+        Command command = Parser.parse("find");
+        assertTrue(command instanceof FindCommand);
     }
 }
