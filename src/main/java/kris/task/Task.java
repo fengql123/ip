@@ -48,7 +48,7 @@ public abstract class Task {
     public String toString() {
         return getTaskType() + "[" + getStatusIcon() + "] " + description;
     }
-    
+
     /**
      * Converts this task to a string format suitable for file storage.
      *

@@ -12,7 +12,7 @@ public class Kris {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
     /**
      * Constructs a new Kris application instance.
      * Initializes the UI, storage, and attempts to load existing tasks from the specified file.
@@ -30,7 +30,7 @@ public class Kris {
             tasks = new TaskList();
         }
     }
-    
+
     /**
      * Runs the main application loop.
      * Shows the welcome message and continuously processes user commands until the user exits.
@@ -53,10 +53,10 @@ public class Kris {
                 ui.showLine();
             }
         }
-        
+
         ui.close();
     }
-    
+
     /**
      * Entry point of the Kris application.
      * Creates and runs a new instance of Kris with the default data file path.

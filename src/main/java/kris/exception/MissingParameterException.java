@@ -12,9 +12,10 @@ public class MissingParameterException extends KrisException {
      * @param parameter The parameter that is missing.
      */
     public MissingParameterException(String command, String parameter) {
-        super("Yo! You gotta tell me which " + command + " " + parameter + "! Use '" + command + " [" + parameter + "]'.");
+        super("Yo! You gotta tell me which " + command + " " + parameter + "! Use '" + command + " [" + parameter
+                + "]'.");
     }
-    
+
     /**
      * Constructs a MissingParameterException with an example usage.
      *

@@ -13,7 +13,7 @@ import kris.exception.KrisException;
  */
 public class DeadlineCommand extends Command {
     private String input;
-    
+
     /**
      * Constructs a DeadlineCommand with the specified input containing the task details.
      *
@@ -22,7 +22,7 @@ public class DeadlineCommand extends Command {
     public DeadlineCommand(String input) {
         this.input = input;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws KrisException {
         Deadline newTask = Parser.parseDeadline(input);
@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
         ui.showTaskAdded(newTask, tasks.size());
         storage.save(tasks.getTasks());
     }
-    
+
     @Override
     public boolean isExit() {
         return false;

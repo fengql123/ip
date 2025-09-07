@@ -39,11 +39,13 @@ public class Event extends Task {
     public String toString() {
         String fromString = (from != null) ? DateParser.formatDateTime(from) : originalFromString;
         String toString = (to != null) ? DateParser.formatDateTime(to) : originalToString;
-        return getTaskType() + "[" + getStatusIcon() + "] " + description + " (from: " + fromString + " to: " + toString + ")";
+        return getTaskType() + "[" + getStatusIcon() + "] " + description + " (from: " + fromString + " to: " + toString
+                + ")";
     }
-    
+
     @Override
     public String toFileString() {
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + originalFromString + " | " + originalToString;
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + originalFromString + " | "
+                + originalToString;
     }
 }

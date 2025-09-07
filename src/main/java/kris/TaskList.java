@@ -11,14 +11,14 @@ import kris.exception.InvalidTaskNumberException;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    
+
     /**
      * Constructs an empty TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
-    
+
     /**
      * Constructs a TaskList with the given list of tasks.
      *
@@ -27,7 +27,7 @@ public class TaskList {
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
-    
+
     /**
      * Adds a task to the end of the task list.
      *
@@ -36,7 +36,7 @@ public class TaskList {
     public void add(Task task) {
         tasks.add(task);
     }
-    
+
     /**
      * Removes and returns the task at the specified index.
      *
@@ -50,7 +50,7 @@ public class TaskList {
         }
         return tasks.remove(index);
     }
-    
+
     public void markTask(int index, boolean isDone) throws InvalidTaskNumberException {
         if (!isValidIndex(index)) {
             throw new InvalidTaskNumberException(String.valueOf(index + 1), size());
@@ -61,26 +61,26 @@ public class TaskList {
             tasks.get(index).markAsNotDone();
         }
     }
-    
+
     public Task get(int index) throws InvalidTaskNumberException {
         if (!isValidIndex(index)) {
             throw new InvalidTaskNumberException(String.valueOf(index + 1), size());
         }
         return tasks.get(index);
     }
-    
+
     public int size() {
         return tasks.size();
     }
-    
+
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
-    
+
     public boolean isValidIndex(int index) {
         return index >= 0 && index < tasks.size();
     }
-    
+
     public List<Task> getTasks() {
         return new ArrayList<>(tasks);
     }
