@@ -14,7 +14,7 @@ public class ExceptionTest {
         assertTrue(message.contains("- todo [description]"));
         assertTrue(message.contains("- deadline [description] /by [time]"));
         assertTrue(message.contains("- event [description] /from [start] /to [end]"));
-        assertTrue(message.contains("- list, mark [number], unmark [number], delete [number], bye"));
+        assertTrue(message.contains("- list, mark [number], unmark [number], delete [number], find [keyword], bye"));
     }
     
     @Test

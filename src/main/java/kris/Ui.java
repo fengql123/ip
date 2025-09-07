@@ -136,6 +136,30 @@ public class Ui {
         System.out.println(" Now you have " + taskCount + " tasks in the list.");
         showLine();
     }
+    
+    /**
+     * Displays search results for tasks matching a keyword.
+     * Shows all matching tasks or a message if no matches found.
+     *
+     * @param matchingTasks TaskList containing tasks that match the search keyword.
+     */
+    public void showFoundTasks(TaskList matchingTasks) {
+        showLine();
+        if (matchingTasks.isEmpty()) {
+            System.out.println(" No matching tasks found in your list!");
+        } else {
+            System.out.println(" Here are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                try {
+                    System.out.println(" " + (i + 1) + "." + matchingTasks.get(i));
+                } catch (InvalidTaskNumberException e) {
+                    // This should not happen since we're using valid indices
+                    System.out.println(" Error displaying task " + (i + 1));
+                }
+            }
+        }
+        showLine();
+    }
 
     public void showError(String message) {
         showLine();
@@ -171,7 +195,7 @@ public class Ui {
         System.out.println(" - todo [description]");
         System.out.println(" - deadline [description] /by [time]");
         System.out.println(" - event [description] /from [start] /to [end]");
-        System.out.println(" - list, mark [number], unmark [number], delete [number], bye");
+        System.out.println(" - list, mark [number], unmark [number], delete [number], find [keyword], bye");
         showLine();
     }
 
