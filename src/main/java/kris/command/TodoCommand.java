@@ -9,11 +9,11 @@ import kris.exception.KrisException;
 
 public class TodoCommand extends Command {
     private String input;
-    
+
     public TodoCommand(String input) {
         this.input = input;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws KrisException {
         Todo newTask = Parser.parseTodo(input);
@@ -21,7 +21,7 @@ public class TodoCommand extends Command {
         ui.showTaskAdded(newTask, tasks.size());
         storage.save(tasks.getTasks());
     }
-    
+
     @Override
     public boolean isExit() {
         return false;

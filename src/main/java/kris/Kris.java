@@ -7,7 +7,7 @@ public class Kris {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
     public Kris(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,7 +18,7 @@ public class Kris {
             tasks = new TaskList();
         }
     }
-    
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -35,10 +35,10 @@ public class Kris {
                 ui.showLine();
             }
         }
-        
+
         ui.close();
     }
-    
+
     public static void main(String[] args) {
         new Kris("data/kris.txt").run();
     }
