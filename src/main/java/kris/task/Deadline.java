@@ -24,7 +24,7 @@ public class Deadline extends Task {
         String dateString = (by != null) ? DateParser.formatDateTime(by) : originalByString;
         return getTaskType() + "[" + getStatusIcon() + "] " + description + " (by: " + dateString + ")";
     }
-    
+
     @Override
     public String toFileString() {
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + originalByString;
