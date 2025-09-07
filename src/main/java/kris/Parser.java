@@ -8,6 +8,7 @@ import kris.command.TodoCommand;
 import kris.command.DeadlineCommand;
 import kris.command.EventCommand;
 import kris.command.DeleteCommand;
+import kris.command.FindCommand;
 import kris.command.Command;
 import kris.task.Todo;
 import kris.task.Deadline;
@@ -53,6 +54,8 @@ public class Parser {
             return new EventCommand(input);
         } else if (input.startsWith("delete")) {
             return new DeleteCommand(input);
+        } else if (input.startsWith("find")) {
+            return new FindCommand(input);
         } else {
             throw new InvalidCommandException(input);
         }
