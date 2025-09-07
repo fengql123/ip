@@ -7,9 +7,18 @@ import kris.Parser;
 import kris.task.Deadline;
 import kris.exception.KrisException;
 
+/**
+ * Command that creates a new deadline task.
+ * Parses the user input to create a deadline task with due date and adds it to the task list.
+ */
 public class DeadlineCommand extends Command {
     private String input;
     
+    /**
+     * Constructs a DeadlineCommand with the specified input containing the task details.
+     *
+     * @param input The input string containing the deadline task description and due date.
+     */
     public DeadlineCommand(String input) {
         this.input = input;
     }

@@ -13,13 +13,30 @@ import kris.task.Deadline;
 import kris.task.Event;
 import kris.exception.KrisException;
 
+/**
+ * Handles file input and output operations for task persistence.
+ * Manages loading tasks from file on startup and saving tasks after changes.
+ */
 public class Storage {
     private String filePath;
     
+    /**
+     * Constructs a Storage instance with the specified file path.
+     *
+     * @param filePath Path to the file for storing and loading tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
     
+    /**
+     * Loads tasks from the storage file.
+     * Creates an empty list if the file does not exist.
+     * Parses each line in the file to reconstruct task objects.
+     *
+     * @return List of tasks loaded from the file.
+     * @throws KrisException If file reading fails or file format is invalid.
+     */
     public List<Task> load() throws KrisException {
         List<Task> tasks = new ArrayList<>();
         
@@ -42,6 +59,14 @@ public class Storage {
         return tasks;
     }
     
+    /**
+     * Saves the task list to the storage file.
+     * Creates parent directories if they do not exist.
+     * Overwrites the existing file with the current task list.
+     *
+     * @param tasks List of tasks to save to file.
+     * @throws KrisException If file writing fails.
+     */
     public void save(List<Task> tasks) throws KrisException {
         try {
             File file = new File(filePath);
