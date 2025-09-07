@@ -20,8 +20,20 @@ import kris.exception.EmptyDescriptionException;
 import kris.exception.InvalidDateFormatException;
 import kris.util.DateParser;
 
+/**
+ * Parses user input and converts it into executable commands.
+ * Handles all command types and validates input format.
+ */
 public class Parser {
     
+    /**
+     * Parses user input string and returns the corresponding command.
+     * Recognizes commands: bye, list, mark, unmark, todo, deadline, event, delete.
+     *
+     * @param input User input string to parse.
+     * @return Command object corresponding to the user input.
+     * @throws InvalidCommandException If the command is not recognized.
+     */
     public static Command parse(String input) throws KrisException {
         input = input.trim();
         
@@ -46,6 +58,16 @@ public class Parser {
         }
     }
     
+    /**
+     * Parses task number from user input for commands that require a task index.
+     * Validates that the number is present and is a valid positive integer.
+     *
+     * @param input User input containing the command and task number.
+     * @param commandWord Command word for error message generation.
+     * @return Task number as a positive integer.
+     * @throws MissingParameterException If no task number is provided.
+     * @throws InvalidTaskNumberException If the task number is not a valid positive integer.
+     */
     public static int parseTaskNumber(String input, String commandWord) throws MissingParameterException, InvalidTaskNumberException {
         String[] parts = input.split(" ", 2);
         if (parts.length < 2 || parts[1].trim().isEmpty()) {
@@ -63,6 +85,15 @@ public class Parser {
         }
     }
     
+    /**
+     * Parses task description from user input.
+     * Validates that a non-empty description is provided.
+     *
+     * @param input User input containing the command and description.
+     * @param commandWord Command word for error message generation.
+     * @return Task description string.
+     * @throws EmptyDescriptionException If no description is provided or description is empty.
+     */
     public static String parseDescription(String input, String commandWord) throws EmptyDescriptionException {
         String[] parts = input.split(" ", 2);
         if (parts.length < 2 || parts[1].trim().isEmpty()) {
@@ -71,11 +102,29 @@ public class Parser {
         return parts[1].trim();
     }
     
+    /**
+     * Parses a todo command and creates a Todo task.
+     * Validates that a description is provided.
+     *
+     * @param input User input for the todo command.
+     * @return Todo task with the specified description.
+     * @throws EmptyDescriptionException If no description is provided.
+     */
     public static Todo parseTodo(String input) throws EmptyDescriptionException {
         String description = parseDescription(input, "todo");
         return new Todo(description);
     }
     
+    /**
+     * Parses a deadline command and creates a Deadline task.
+     * Validates description and date format. Supports multiple date formats.
+     *
+     * @param input User input for the deadline command.
+     * @return Deadline task with the specified description and deadline.
+     * @throws EmptyDescriptionException If no description is provided.
+     * @throws InvalidDateFormatException If the date format is invalid.
+     * @throws KrisException If the '/by' keyword is missing.
+     */
     public static Deadline parseDeadline(String input) throws EmptyDescriptionException, InvalidDateFormatException, KrisException {
         int byIndex = input.indexOf("/by ");
         if (byIndex == -1) {
@@ -92,6 +141,15 @@ public class Parser {
         return new Deadline(taskDescription, by);
     }
     
+    /**
+     * Parses an event command and creates an Event task.
+     * Validates description and date formats for both start and end times.
+     *
+     * @param input User input for the event command.
+     * @return Event task with the specified description, start time, and end time.
+     * @throws InvalidDateFormatException If either date format is invalid.
+     * @throws KrisException If '/from' or '/to' keywords are missing.
+     */
     public static Event parseEvent(String input) throws InvalidDateFormatException, KrisException {
         int fromIndex = input.indexOf("/from ");
         int toIndex = input.indexOf("/to ");
