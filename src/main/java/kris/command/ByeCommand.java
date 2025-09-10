@@ -15,6 +15,11 @@ public class ByeCommand extends Command {
     }
 
     @Override
+    protected String getResponse(TaskList tasks, Storage storage) {
+        return "Peace out! Keep it real, catch you on the flip side!\nHope to see you again soon, my friend!";
+    }
+
+    @Override
     public boolean isExit() {
         return true;
     }
