@@ -107,29 +107,55 @@ public class TaskList {
      * Tasks with unparseable dates are placed at the end.
      */
     public void sortByDeadline() {
-        tasks.sort((task1, task2) -> {
-            boolean isTask1Deadline = task1.getTaskType() == TaskType.DEADLINE;
-            boolean isTask2Deadline = task2.getTaskType() == TaskType.DEADLINE;
-            
-            if (isTask1Deadline && isTask2Deadline) {
-                LocalDateTime deadline1 = ((Deadline) task1).getDeadline();
-                LocalDateTime deadline2 = ((Deadline) task2).getDeadline();
-                
-                if (deadline1 == null && deadline2 == null) {
-                    return task1.getDescription().compareToIgnoreCase(task2.getDescription());
-                }
-                if (deadline1 == null) return 1;
-                if (deadline2 == null) return -1;
-                
-                return deadline1.compareTo(deadline2);
-            } else if (isTask1Deadline) {
-                return -1;
-            } else if (isTask2Deadline) {
-                return 1;
-            } else {
-                return task1.getDescription().compareToIgnoreCase(task2.getDescription());
-            }
-        });
+        tasks.sort(this::compareTasksByDeadline);
+    }
+
+    /**
+     * Comparator method for sorting tasks by deadline.
+     */
+    private int compareTasksByDeadline(Task task1, Task task2) {
+        boolean isTask1Deadline = isDeadlineTask(task1);
+        boolean isTask2Deadline = isDeadlineTask(task2);
+        
+        if (isTask1Deadline && isTask2Deadline) {
+            return compareTwoDeadlines((Deadline) task1, (Deadline) task2);
+        } else if (isTask1Deadline) {
+            return -1;
+        } else if (isTask2Deadline) {
+            return 1;
+        } else {
+            return compareByDescription(task1, task2);
+        }
+    }
+
+    /**
+     * Compares two deadline tasks by their deadline dates.
+     */
+    private int compareTwoDeadlines(Deadline deadline1, Deadline deadline2) {
+        LocalDateTime date1 = deadline1.getDeadline();
+        LocalDateTime date2 = deadline2.getDeadline();
+        
+        if (date1 == null && date2 == null) {
+            return compareByDescription(deadline1, deadline2);
+        }
+        if (date1 == null) return 1;
+        if (date2 == null) return -1;
+        
+        return date1.compareTo(date2);
+    }
+
+    /**
+     * Checks if a task is a deadline task.
+     */
+    private boolean isDeadlineTask(Task task) {
+        return task.getTaskType() == TaskType.DEADLINE;
+    }
+
+    /**
+     * Compares two tasks by their descriptions (case-insensitive).
+     */
+    private int compareByDescription(Task task1, Task task2) {
+        return task1.getDescription().compareToIgnoreCase(task2.getDescription());
     }
 
     /**
