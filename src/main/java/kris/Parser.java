@@ -21,6 +21,8 @@ import kris.exception.InvalidTaskNumberException;
 import kris.exception.EmptyDescriptionException;
 import kris.exception.InvalidDateFormatException;
 import kris.util.DateParser;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Parses user input and converts it into executable commands.
@@ -178,6 +180,16 @@ public class Parser {
         return new Event(description, from, to);
     }
 
+    private static final Map<String, SortType> LIST_SORT_OPTIONS = new HashMap<>();
+    
+    static {
+        LIST_SORT_OPTIONS.put("list", SortType.NONE);
+        LIST_SORT_OPTIONS.put("list deadline", SortType.DEADLINE);
+        LIST_SORT_OPTIONS.put("list description", SortType.DESCRIPTION);
+        LIST_SORT_OPTIONS.put("list status", SortType.STATUS);
+        LIST_SORT_OPTIONS.put("list default", SortType.DEFAULT);
+    }
+
     /**
      * Parses a list command and creates a ListCommand with appropriate sorting.
      * Supports flags: deadline, description, status, default.
@@ -191,17 +203,10 @@ public class Parser {
         assert input != null : "List command input should not be null";
         
         String trimmedInput = input.trim().toLowerCase();
+        SortType sortType = LIST_SORT_OPTIONS.get(trimmedInput);
         
-        if (trimmedInput.equals("list")) {
-            return new ListCommand(SortType.NONE);
-        } else if (trimmedInput.equals("list deadline")) {
-            return new ListCommand(SortType.DEADLINE);
-        } else if (trimmedInput.equals("list description")) {
-            return new ListCommand(SortType.DESCRIPTION);
-        } else if (trimmedInput.equals("list status")) {
-            return new ListCommand(SortType.STATUS);
-        } else if (trimmedInput.equals("list default")) {
-            return new ListCommand(SortType.DEFAULT);
+        if (sortType != null) {
+            return new ListCommand(sortType);
         } else {
             throw new InvalidCommandException("Unknown list sort option. Use: list [deadline/description/status/default]");
         }
