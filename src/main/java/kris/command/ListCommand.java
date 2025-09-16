@@ -78,41 +78,40 @@ public class ListCommand extends Command {
     private void applySorting(TaskList tasks, Storage storage) {
         switch (sortType) {
             case DEFAULT:
-                tasks.sortByDefault();
-                try {
-                    storage.save(tasks.getTasks());
-                } catch (Exception e) {
-                    // Ignore storage errors for now
-                }
+                sortAndSave(tasks, storage, tasks::sortByDefault);
                 break;
             case DEADLINE:
-                tasks.sortByDeadline();
-                try {
-                    storage.save(tasks.getTasks());
-                } catch (Exception e) {
-                    // Ignore storage errors for now
-                }
+                sortAndSave(tasks, storage, tasks::sortByDeadline);
                 break;
             case DESCRIPTION:
-                tasks.sortByDescription();
-                try {
-                    storage.save(tasks.getTasks());
-                } catch (Exception e) {
-                    // Ignore storage errors for now
-                }
+                sortAndSave(tasks, storage, tasks::sortByDescription);
                 break;
             case STATUS:
-                tasks.sortByStatus();
-                try {
-                    storage.save(tasks.getTasks());
-                } catch (Exception e) {
-                    // Ignore storage errors for now
-                }
+                sortAndSave(tasks, storage, tasks::sortByStatus);
                 break;
             case NONE:
             default:
                 // No sorting applied
                 break;
+        }
+    }
+
+    /**
+     * Applies sorting using the provided sorting function and saves to storage.
+     */
+    private void sortAndSave(TaskList tasks, Storage storage, Runnable sortFunction) {
+        sortFunction.run();
+        saveTasksToStorage(tasks, storage);
+    }
+
+    /**
+     * Saves tasks to storage, ignoring any storage errors.
+     */
+    private void saveTasksToStorage(TaskList tasks, Storage storage) {
+        try {
+            storage.save(tasks.getTasks());
+        } catch (Exception e) {
+            // Ignore storage errors for now
         }
     }
     
