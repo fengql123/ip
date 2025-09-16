@@ -195,7 +195,7 @@ public class Ui {
         System.out.println(" - todo [description]");
         System.out.println(" - deadline [description] /by [time]");
         System.out.println(" - event [description] /from [start] /to [end]");
-        System.out.println(" - list, mark [number], unmark [number], delete [number], find [keyword], bye");
+        System.out.println(" - list [deadline/description/status/default], mark [number], unmark [number], delete [number], find [keyword], bye");
         showLine();
     }
 
