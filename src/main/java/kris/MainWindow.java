@@ -1,5 +1,6 @@
 package kris;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import kris.command.Command;
+import kris.exception.KrisException;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -36,15 +39,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getKrisDialog(response, krisImage)
-        );
+        
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         userInput.clear();
-    }
-
-    private String getResponse(String input) {
-        return kris.getResponse(input);
+        
+        try {
+            Command c = Parser.parse(input);
+            if (c.isExit()) {
+                Platform.exit();
+                return;
+            }
+            String response = kris.getResponse(input);
+            dialogContainer.getChildren().add(DialogBox.getKrisDialog(response, krisImage));
+        } catch (KrisException e) {
+            dialogContainer.getChildren().add(DialogBox.getKrisDialog("OOPS!!! " + e.getMessage(), krisImage));
+        }
     }
 }
