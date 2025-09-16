@@ -14,16 +14,27 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        assert stage != null : "Stage should not be null";
+        
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            assert fxmlLoader != null : "FXMLLoader should be successfully created";
+            
             AnchorPane ap = fxmlLoader.load();
+            assert ap != null : "FXML should load successfully and return a valid AnchorPane";
+            
             Scene scene = new Scene(ap);
+            assert scene != null : "Scene should be created successfully";
+            
             stage.setScene(scene);
             stage.setTitle("Kris");
-            stage.setMinHeight(620);
-            stage.setMinWidth(400);
-            stage.setResizable(true);
-            fxmlLoader.<MainWindow>getController().setKris(kris);
+            
+            MainWindow controller = fxmlLoader.<MainWindow>getController();
+            assert controller != null : "Controller should be loaded from FXML";
+            
+            controller.setKris(kris);
+            assert kris != null : "Kris instance should be initialized before setting";
+            
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
