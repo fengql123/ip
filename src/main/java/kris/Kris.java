@@ -21,14 +21,22 @@ public class Kris {
      * @param filePath Path to the file where tasks are stored and loaded from.
      */
     public Kris(String filePath) {
+        assert filePath != null : "File path should not be null";
+        
         ui = new Ui();
+        assert ui != null : "UI should be initialized successfully";
+        
         storage = new Storage(filePath);
+        assert storage != null : "Storage should be initialized successfully";
+        
         try {
             tasks = new TaskList(storage.load());
         } catch (KrisException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+        
+        assert tasks != null : "TaskList should be initialized (either loaded or empty)";
     }
 
     /**
