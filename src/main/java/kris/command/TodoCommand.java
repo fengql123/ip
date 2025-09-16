@@ -32,6 +32,14 @@ public class TodoCommand extends Command {
     }
 
     @Override
+    protected String getResponse(TaskList tasks, Storage storage) throws KrisException {
+        Todo newTask = Parser.parseTodo(input);
+        tasks.add(newTask);
+        storage.save(tasks.getTasks());
+        return "Got it. I've added this task:\n  " + newTask + "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
+
+    @Override
     public boolean isExit() {
         return false;
     }

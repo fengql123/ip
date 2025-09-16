@@ -58,6 +58,22 @@ public class Kris {
     }
 
     /**
+     * Generates a response to a user command for GUI mode.
+     * Processes the command and returns the appropriate response string.
+     *
+     * @param input User command string.
+     * @return Response string to display in GUI.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.executeForGui(tasks, storage);
+        } catch (KrisException e) {
+            return "OOPS!!! " + e.getMessage();
+        }
+    }
+
+    /**
      * Entry point of the Kris application.
      * Creates and runs a new instance of Kris with the default data file path.
      *
