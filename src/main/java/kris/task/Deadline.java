@@ -36,6 +36,15 @@ public class Deadline extends Task {
         return getTaskType() + "[" + getStatusIcon() + "] " + description + " (by: " + dateString + ")";
     }
 
+    /**
+     * Gets the deadline of this task.
+     *
+     * @return The deadline as LocalDateTime, or null if parsing failed.
+     */
+    public LocalDateTime getDeadline() {
+        return by;
+    }
+
     @Override
     public String toFileString() {
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + originalByString;

@@ -2,6 +2,7 @@ package kris;
 
 import kris.command.ByeCommand;
 import kris.command.ListCommand;
+import kris.command.ListCommand.SortType;
 import kris.command.MarkCommand;
 import kris.command.UnmarkCommand;
 import kris.command.TodoCommand;
@@ -40,8 +41,8 @@ public class Parser {
 
         if (input.equals("bye")) {
             return new ByeCommand();
-        } else if (input.equals("list")) {
-            return new ListCommand();
+        } else if (input.startsWith("list")) {
+            return parseListCommand(input);
         } else if (input.startsWith("mark")) {
             return new MarkCommand(input);
         } else if (input.startsWith("unmark")) {
@@ -175,5 +176,34 @@ public class Parser {
         }
 
         return new Event(description, from, to);
+    }
+
+    /**
+     * Parses a list command and creates a ListCommand with appropriate sorting.
+     * Supports flags: deadline, description, status, default.
+     * Examples: "list", "list deadline", "list description", "list status", "list default"
+     *
+     * @param input User input for the list command.
+     * @return ListCommand with the specified sorting type.
+     * @throws InvalidCommandException If the sort flag is invalid.
+     */
+    public static ListCommand parseListCommand(String input) throws InvalidCommandException {
+        assert input != null : "List command input should not be null";
+        
+        String trimmedInput = input.trim().toLowerCase();
+        
+        if (trimmedInput.equals("list")) {
+            return new ListCommand(SortType.NONE);
+        } else if (trimmedInput.equals("list deadline")) {
+            return new ListCommand(SortType.DEADLINE);
+        } else if (trimmedInput.equals("list description")) {
+            return new ListCommand(SortType.DESCRIPTION);
+        } else if (trimmedInput.equals("list status")) {
+            return new ListCommand(SortType.STATUS);
+        } else if (trimmedInput.equals("list default")) {
+            return new ListCommand(SortType.DEFAULT);
+        } else {
+            throw new InvalidCommandException("Unknown list sort option. Use: list [deadline/description/status/default]");
+        }
     }
 }

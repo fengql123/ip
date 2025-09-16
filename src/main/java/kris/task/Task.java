@@ -44,6 +44,24 @@ public abstract class Task {
      */
     public abstract TaskType getTaskType();
 
+    /**
+     * Gets the description of this task.
+     *
+     * @return The task description.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Returns whether this task is completed.
+     *
+     * @return true if task is done, false otherwise.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         return getTaskType() + "[" + getStatusIcon() + "] " + description;
