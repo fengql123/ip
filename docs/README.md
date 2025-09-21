@@ -59,14 +59,14 @@ Adds a task with a deadline to the task list.
 **Format:** `deadline DESCRIPTION /by DATE_TIME`
 
 **Examples:**
-- `deadline return book /by Sunday`
+- `deadline return book /by 2/12/2019`
 - `deadline submit assignment /by 2/12/2019 1800`
-- `deadline project meeting /by Dec 2 2019 6pm`
+- `deadline project meeting /by 2019-12-02 1800`
 
 **Expected outcome:**
 ```
 Got it. I've added this task:
-  [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Dec 02 2019)
 Now you have 2 tasks in the list.
 ```
 
@@ -77,13 +77,13 @@ Adds an event to the task list.
 **Format:** `event DESCRIPTION /from START_TIME /to END_TIME`
 
 **Examples:**
-- `event project meeting /from Mon 2pm /to 4pm`
+- `event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600`
 - `event conference /from 2/12/2019 0900 /to 2/12/2019 1800`
 
 **Expected outcome:**
 ```
 Got it. I've added this task:
-  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+  [E][ ] project meeting (from: Dec 02 2019 1400hrs to: Dec 02 2019 1600hrs)
 Now you have 3 tasks in the list.
 ```
 
@@ -107,8 +107,8 @@ Shows a list of all tasks in the task list with optional sorting.
 **Expected outcome:**
 ```
 Here are the tasks in your list (sorted by deadline):
-1.[D][ ] return book (by: Sunday)
-2.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+1.[D][ ] return book (by: Dec 02 2019)
+2.[E][ ] project meeting (from: Dec 02 2019 1400hrs to: Dec 02 2019 1600hrs)
 3.[T][ ] read book
 ```
 
@@ -124,7 +124,7 @@ Marks the specified task as completed.
 **Expected outcome:**
 ```
 Nice! I've marked this task as done:
-  [E][X] project meeting (from: Mon 2pm to: 4pm)
+  [E][X] project meeting (from: Dec 02 2019 1400hrs to: Dec 02 2019 1600hrs)
 ```
 
 ### Marking a task as not done: `unmark`
@@ -139,7 +139,7 @@ Marks the specified task as not completed.
 **Expected outcome:**
 ```
 OK, I've marked this task as not done yet:
-  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+  [E][ ] project meeting (from: Dec 02 2019 1400hrs to: Dec 02 2019 1600hrs)
 ```
 
 ### Deleting a task: `delete`
@@ -170,7 +170,7 @@ Finds tasks whose descriptions contain the given keyword.
 **Expected outcome:**
 ```
 Here are the matching tasks in your list:
-1.[D][ ] return book (by: Sunday)
+1.[D][ ] return book (by: Dec 02 2019)
 ```
 
 ### Exiting the program: `bye`
@@ -214,8 +214,8 @@ The data file is created automatically when you first run Kris, and your tasks w
 | Action | Format | Example |
 |--------|--------|---------|
 | **Add Todo** | `todo DESCRIPTION` | `todo read book` |
-| **Add Deadline** | `deadline DESCRIPTION /by DATE` | `deadline submit report /by Friday` |
-| **Add Event** | `event DESCRIPTION /from START /to END` | `event meeting /from 2pm /to 4pm` |
+| **Add Deadline** | `deadline DESCRIPTION /by DATE` | `deadline submit report /by 2/12/2019` |
+| **Add Event** | `event DESCRIPTION /from START /to END` | `event meeting /from 2/12/2019 1400 /to 2/12/2019 1600` |
 | **List Tasks** | `list [SORT_TYPE]` | `list deadline` |
 | **Mark Done** | `mark INDEX` | `mark 1` |
 | **Mark Undone** | `unmark INDEX` | `unmark 1` |
@@ -227,13 +227,14 @@ The data file is created automatically when you first run Kris, and your tasks w
 
 ## Date and Time Formats
 
-Kris supports flexible date and time input formats:
+Kris supports the following date and time input formats:
 
-- `2/12/2019 1800` (DD/MM/YYYY HHMM)
-- `Dec 2 2019 6pm` (Natural language)
-- `2019-12-02 18:00` (ISO format)
-- `Sunday`, `Monday`, etc. (Day names)
-- `tomorrow`, `next week` (Relative dates)
+- `2/12/2019 1800` (D/M/YYYY HHMM)
+- `02/12/2019 1800` (DD/MM/YYYY HHMM)
+- `2019-12-02 1800` (YYYY-MM-DD HHMM)
+- `2/12/2019` (D/M/YYYY - date only)
+- `02/12/2019` (DD/MM/YYYY - date only)
+- `2019-12-02` (YYYY-MM-DD - date only)
 
 ---
 
