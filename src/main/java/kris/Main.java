@@ -12,6 +12,10 @@ public class Main extends Application {
 
     private Kris kris = new Kris("data/kris.txt");
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage stage) {
         assert stage != null : "Stage should not be null";

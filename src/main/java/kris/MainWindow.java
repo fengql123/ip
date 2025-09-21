@@ -34,6 +34,19 @@ public class MainWindow extends AnchorPane {
 
     public void setKris(Kris k) {
         kris = k;
+        String greeting = "Hello! I'm Kris, your task management assistant.\n\n" +
+                "Available commands:\n" +
+                "• todo <description> - Add a todo task\n" +
+                "• deadline <description> /by <date> - Add a deadline\n" +
+                "• event <description> /from <start> /to <end> - Add an event\n" +
+                "• list - Show all tasks (supports sorting: list deadline, list description, list status, list default)\n" +
+                "• mark <number> - Mark task as done\n" +
+                "• unmark <number> - Mark task as not done\n" +
+                "• delete <number> - Delete a task\n" +
+                "• find <keyword> - Search for tasks\n" +
+                "• bye - Exit the application\n\n" +
+                "What can I help you with today?";
+        dialogContainer.getChildren().add(DialogBox.getKrisDialog(greeting, krisImage));
     }
 
     @FXML

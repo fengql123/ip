@@ -34,6 +34,16 @@ public class MarkCommand extends Command {
     }
 
     @Override
+    protected String getResponse(TaskList tasks, Storage storage) throws KrisException {
+        int taskNumber = Parser.parseTaskNumber(input, "mark");
+        int index = taskNumber - 1;
+        tasks.markTask(index, true);
+        Task markedTask = tasks.get(index);
+        storage.save(tasks.getTasks());
+        return String.format("Nice! I've marked this task as done:\n  %s", markedTask);
+    }
+
+    @Override
     public boolean isExit() {
         return false;
     }

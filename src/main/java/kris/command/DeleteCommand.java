@@ -33,6 +33,16 @@ public class DeleteCommand extends Command {
     }
 
     @Override
+    protected String getResponse(TaskList tasks, Storage storage) throws KrisException {
+        int taskNumber = Parser.parseTaskNumber(input, "delete");
+        int index = taskNumber - 1;
+        Task deletedTask = tasks.remove(index);
+        storage.save(tasks.getTasks());
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
+                            deletedTask, tasks.size());
+    }
+
+    @Override
     public boolean isExit() {
         return false;
     }

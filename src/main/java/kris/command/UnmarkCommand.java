@@ -34,6 +34,16 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
+    protected String getResponse(TaskList tasks, Storage storage) throws KrisException {
+        int taskNumber = Parser.parseTaskNumber(input, "unmark");
+        int index = taskNumber - 1;
+        tasks.markTask(index, false);
+        Task unmarkedTask = tasks.get(index);
+        storage.save(tasks.getTasks());
+        return String.format("OK, I've marked this task as not done yet:\n  %s", unmarkedTask);
+    }
+
+    @Override
     public boolean isExit() {
         return false;
     }

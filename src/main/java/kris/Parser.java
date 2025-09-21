@@ -152,11 +152,12 @@ public class Parser {
     /**
      * Parses an event command and creates an Event task.
      * Validates description and date formats for both start and end times.
+     * Ensures that the end time is not earlier than the start time.
      *
      * @param input User input for the event command.
      * @return Event task with the specified description, start time, and end time.
      * @throws InvalidDateFormatException If either date format is invalid.
-     * @throws KrisException If '/from' or '/to' keywords are missing.
+     * @throws KrisException If '/from' or '/to' keywords are missing or end time is before start time.
      */
     public static Event parseEvent(String input) throws InvalidDateFormatException, KrisException {
         int fromIndex = input.indexOf("/from ");
@@ -175,6 +176,14 @@ public class Parser {
         }
         if (!DateParser.isValidDateTime(to)) {
             throw new InvalidDateFormatException(to);
+        }
+
+        // Validate that 'to' date is not earlier than 'from' date
+        java.time.LocalDateTime fromDateTime = DateParser.parseDateTime(from);
+        java.time.LocalDateTime toDateTime = DateParser.parseDateTime(to);
+
+        if (toDateTime.isBefore(fromDateTime)) {
+            throw new KrisException("Yo! The end time cannot be earlier than the start time!");
         }
 
         return new Event(description, from, to);

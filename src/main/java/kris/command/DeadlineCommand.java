@@ -32,6 +32,15 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
+    protected String getResponse(TaskList tasks, Storage storage) throws KrisException {
+        Deadline newTask = Parser.parseDeadline(input);
+        tasks.add(newTask);
+        storage.save(tasks.getTasks());
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                            newTask, tasks.size());
+    }
+
+    @Override
     public boolean isExit() {
         return false;
     }

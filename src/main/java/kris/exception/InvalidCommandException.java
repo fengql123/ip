@@ -16,10 +16,15 @@ public class InvalidCommandException extends KrisException {
 
     @Override
     public String getMessage() {
-        return super.getMessage() + "\n Try these commands:\n" +
+        return super.getMessage() + "\n\nTry these commands:\n" +
                 " - todo [description]\n" +
                 " - deadline [description] /by [time]\n" +
                 " - event [description] /from [start] /to [end]\n" +
-                " - list, mark [number], unmark [number], delete [number], find [keyword], bye";
+                " - list (supports sorting: list deadline, list description, list status, list default)\n" +
+                " - mark [number]\n" +
+                " - unmark [number]\n" +
+                " - delete [number]\n" +
+                " - find [keyword]\n" +
+                " - bye";
     }
 }

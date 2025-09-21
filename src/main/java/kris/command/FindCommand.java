@@ -41,6 +41,32 @@ public class FindCommand extends Command {
     }
     
     @Override
+    protected String getResponse(TaskList tasks, Storage storage) throws KrisException {
+        String keyword = Parser.parseDescription(input, "find");
+        TaskList matchingTasks = new TaskList();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            try {
+                if (tasks.get(i).toString().toLowerCase().contains(keyword.toLowerCase())) {
+                    matchingTasks.add(tasks.get(i));
+                }
+            } catch (Exception e) {
+                // Skip invalid indices
+            }
+        }
+
+        if (matchingTasks.size() == 0) {
+            return "No matching tasks found.";
+        }
+
+        StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            result.append(String.format("%d.%s\n", i + 1, matchingTasks.get(i)));
+        }
+        return result.toString().trim();
+    }
+
+    @Override
     public boolean isExit() {
         return false;
     }
