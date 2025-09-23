@@ -13,8 +13,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /** The default data file path for storing Kris data. */
+    private static final String DATA_FILE_PATH = "data/kris.txt";
+
     /** The Kris chatbot instance that handles user interactions. */
-    private Kris kris = new Kris("data/kris.txt");
+    private Kris kris = new Kris(DATA_FILE_PATH);
 
     /**
      * Starts the JavaFX application and initializes the main window.
