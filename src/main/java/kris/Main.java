@@ -13,6 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /** The Kris chatbot instance that handles user interactions. */
     private Kris kris = new Kris("data/kris.txt");
 
     /**
