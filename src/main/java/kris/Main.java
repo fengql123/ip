@@ -15,6 +15,11 @@ public class Main extends Application {
 
     private Kris kris = new Kris("data/kris.txt");
 
+    /**
+     * Starts the JavaFX application and initializes the main window.
+     *
+     * @param stage The primary stage for this application
+     */
     @Override
     public void start(Stage stage) {
         assert stage != null : "Stage should not be null";
