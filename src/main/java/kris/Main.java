@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Main application class that initializes and starts the Kris chatbot GUI.
+ */
 public class Main extends Application {
 
     private Kris kris = new Kris("data/kris.txt");
